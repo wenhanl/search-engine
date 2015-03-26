@@ -71,4 +71,9 @@ public class ScoreList{
     }
 
 
+    public boolean isEmpty(){
+        return scores.isEmpty();
+    }
+
+
 }

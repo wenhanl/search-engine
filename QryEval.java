@@ -23,6 +23,16 @@ import org.apache.lucene.util.Version;
 import java.io.*;
 import java.util.*;
 
+class QueryRes{
+    String id;
+    QryResult result;
+
+    QueryRes(String id, QryResult res) {
+        this.id = id;
+        this.result = res;
+    }
+}
+
 public class QryEval {
 
     public static IndexReader READER;
@@ -50,6 +60,9 @@ public class QryEval {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
+
+//        long maxBytes = Runtime.getRuntime().maxMemory();
+//        System.out.println("Max memory: " + maxBytes / 1024 / 1024 + "M");
 
         // must supply parameter file
         if (args.length < 1) {
@@ -119,20 +132,27 @@ public class QryEval {
             e.printStackTrace();
         }
 
-        scan = new Scanner(new File(params.get("queryFilePath")));
-        do {
-            line = scan.nextLine();
-            String[] pair = line.split(":");
-            String queryId = pair[0];
-            String queryString = pair[1];
-            Qryop qTree = parseQuery(queryString, model);
-            QryResult result = qTree.evaluate(model);
-            result.docScores.prioritySort();
+        ArrayList<QueryRes> results = new ArrayList<QueryRes>();
 
-            writeResults(writer, queryId, result);
+        if (!params.containsKey("fb") || !params.get("fb").equals("true") || !params.containsKey("fbInitialRankingFile")) {
+            // Old way to retrieve documents
+            getResultsFromQuery(params.get("queryFilePath"), results, model);
+        } else {
+            if (params.containsKey("fbInitialRankingFile")) {
+                // Load result from result file
+                getResultFromFile(params.get("fbInitialRankingFile"), results);
+            } else {
+                getResultsFromQuery(params.get("queryFilePath"), results, model);
+            }
 
-        } while (scan.hasNext());
-        scan.close();
+            // Query expansion begin
+
+        }
+
+
+        for (QueryRes res : results) {
+            writeResults(writer, res.id, res.result);
+        }
 
         try {
             writer.close();
@@ -143,7 +163,76 @@ public class QryEval {
         long endTime = System.currentTimeMillis();
 
         System.out.println("Running time: " + (endTime - startTime) + " ms.");
-//        printMemoryUsage(false);
+        printMemoryUsage(false);
+
+    }
+
+    /**
+     * Run query retrieval to get results
+     * @param paramFileName
+     * @param results
+     * @param model
+     */
+    static void getResultsFromQuery(String paramFileName, ArrayList<QueryRes> results, RetrievalModel model) {
+        Scanner scan = null;
+        try {
+            scan = new Scanner(new File(paramFileName));
+
+            do {
+                String line = scan.nextLine();
+                String[] pair = line.split(":");
+                String queryId = pair[0];
+                String queryString = pair[1];
+                Qryop qTree = parseQuery(queryString, model);
+                QryResult result = qTree.evaluate(model);
+                result.docScores.prioritySort();
+                results.add(new QueryRes(queryId, result));
+
+            } while (scan.hasNext());
+            scan.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * If initial result file provided,
+     * @param resultFile
+     * @param results
+     */
+    static void getResultFromFile(String resultFile, ArrayList<QueryRes> results) {
+        // Load results form init file
+        QryResult res = new QryResult();
+        String currId = "";
+        try {
+            Scanner scan = new Scanner(new File(resultFile));
+            do {
+                String line = scan.nextLine();
+                String[] pair = line.split(" ");
+                String queryId = pair[0];
+                int docid = getInternalDocid(pair[2]);
+                double score = Double.valueOf(pair[4]);
+
+                if (!currId.equals(queryId) && !res.docScores.isEmpty()) {
+                    results.add(new QueryRes(currId, res));
+                    res = new QryResult();
+                }
+
+                currId = queryId;
+                res.docScores.scores.add(new ScoreListEntry(docid, score));
+
+
+            } while (scan.hasNext());
+            scan.close();
+
+            results.add(new QueryRes(currId, res));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
