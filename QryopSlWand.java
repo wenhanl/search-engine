@@ -8,7 +8,17 @@ public class QryopSlWand extends QryopSl{
 
     @Override
     public double getDefaultScore(RetrievalModel r, long docid) throws IOException {
-        return 0;
+        if (!(r instanceof RetrievalModelIndri)) {
+            return (0.0);
+        }
+
+
+        double score = 1;
+        for (int i = 0; i < args.size(); i++) {
+            score *= Math.pow(((QryopSl) args.get(i)).getDefaultScore(r, docid), args.get(i).weight);
+        }
+
+        return score;
     }
 
     @Override

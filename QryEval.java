@@ -343,31 +343,63 @@ public class QryEval {
                 stack.push(newOp);
                 currentOp = newOp;
             } else if (token.equalsIgnoreCase("#syn")) {
-                currentOp = new QryopIlSyn();
-                stack.push(currentOp);
+                Qryop newOp = new QryopIlSyn();
+                if (currentOp instanceof QryopSlWand || currentOp instanceof QryopSlWsum) {
+                    newOp.weight = currWeight;
+                    currWeight = -1;
+                }
+                stack.push(newOp);
+                currentOp = newOp;
             } else if (token.equalsIgnoreCase("#or")) {
-                currentOp = new QryopSlOr();
-                stack.push(currentOp);
+                Qryop newOp = new QryopSlOr();
+                if (currentOp instanceof QryopSlWand || currentOp instanceof QryopSlWsum) {
+                    newOp.weight = currWeight;
+                    currWeight = -1;
+                }
+                stack.push(newOp);
+                currentOp = newOp;
             } else if (token.equalsIgnoreCase("#wand")) {
-                currentOp = new QryopSlWand();
-                stack.push(currentOp);
+                Qryop newOp = new QryopSlWand();
+                if (currentOp instanceof QryopSlWand || currentOp instanceof QryopSlWsum) {
+                    newOp.weight = currWeight;
+                    currWeight = -1;
+                }
+                stack.push(newOp);
+                currentOp = newOp;
             } else if (token.equalsIgnoreCase("#wsum")) {
-                currentOp = new QryopSlWsum();
-                stack.push(currentOp);
+                Qryop newOp = new QryopSlWsum();
+                if (currentOp instanceof QryopSlWand || currentOp instanceof QryopSlWsum) {
+                    newOp.weight = currWeight;
+                    currWeight = -1;
+                }
+                stack.push(newOp);
+                currentOp = newOp;
             } else if (token.length() > 6 && token.toLowerCase().startsWith("#near/")) {
                 int nearN = Integer.valueOf(token.substring(6));
-                currentOp = new QryopIlNear(nearN);
-                stack.push(currentOp);
+                Qryop newOp = new QryopIlNear(nearN);
+                if (currentOp instanceof QryopSlWand || currentOp instanceof QryopSlWsum) {
+                    newOp.weight = currWeight;
+                    currWeight = -1;
+                }
+                stack.push(newOp);
+                currentOp = newOp;
             } else if (token.length() > 8 && token.toLowerCase().startsWith("#window/")) {
                 int window = Integer.valueOf(token.substring(8));
-                currentOp = new QryopIlWindow(window);
-                stack.push(currentOp);
-            } else if (token.equalsIgnoreCase("#syn")) {
-                currentOp = new QryopIlSyn();
-                stack.push(currentOp);
+                Qryop newOp = new QryopIlWindow(window);
+                if (currentOp instanceof QryopSlWand || currentOp instanceof QryopSlWsum) {
+                    newOp.weight = currWeight;
+                    currWeight = -1;
+                }
+                stack.push(newOp);
+                currentOp = newOp;
             } else if (token.equalsIgnoreCase("#sum")) {
-                currentOp = new QryopSlSum();
-                stack.push(currentOp);
+                Qryop newOp = new QryopSlSum();
+                if (currentOp instanceof QryopSlWand || currentOp instanceof QryopSlWsum) {
+                    newOp.weight = currWeight;
+                    currWeight = -1;
+                }
+                stack.push(newOp);
+                currentOp = newOp;
             } else if (token.startsWith(")")) { // Finish current query operator.
                 // If the current query operator is not an argument to
                 // another query operator (i.e., the stack is empty when it

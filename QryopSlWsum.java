@@ -10,7 +10,17 @@ public class QryopSlWsum extends QryopSl{
 
     @Override
     public double getDefaultScore(RetrievalModel r, long docid) throws IOException {
-        return 0;
+        if (!(r instanceof RetrievalModelIndri)) {
+            return (0.0);
+        }
+
+
+        double score = 0;
+        for (int i = 0; i < args.size(); i++) {
+            score += ((QryopSl) args.get(i)).getDefaultScore(r, docid) * args.get(i).weight;
+        }
+
+        return score;
     }
 
     @Override

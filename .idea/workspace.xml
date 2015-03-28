@@ -2,40 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c55af19-b077-4dfe-8833-c4df7cce1537" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0.fdt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0.fdx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0.fnm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0.nvd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0.nvm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0.si" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0.tvd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0.tvx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0_Lucene41_0.doc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0_Lucene41_0.pos" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0_Lucene41_0.tim" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/_0_Lucene41_0.tip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/segments.gen" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index/segments_1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/QryEval/.idea/uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/QryEval/wenhanl-HW2-Report.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wenhanl-HW3-Report.pdf" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/QryEval/QryEval.class" afterPath="$PROJECT_DIR$/out/production/QryEval/QryEval.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sample.out" afterPath="$PROJECT_DIR$/Sample.out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/QryEval/Sample.out" afterPath="$PROJECT_DIR$/out/production/QryEval/Sample.out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/QryEval/ScoreList.class" afterPath="$PROJECT_DIR$/out/production/QryEval/ScoreList.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QryEval.java" afterPath="$PROJECT_DIR$/QryEval.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sample.param" afterPath="$PROJECT_DIR$/Sample.param" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/QryEval/Sample.param" afterPath="$PROJECT_DIR$/out/production/QryEval/Sample.param" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ScoreList.java" afterPath="$PROJECT_DIR$/ScoreList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/QryEval/.idea/compiler.xml" afterPath="$PROJECT_DIR$/out/production/QryEval/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/QryEval/.idea/misc.xml" afterPath="$PROJECT_DIR$/out/production/QryEval/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/QryEval/.idea/vcs.xml" afterPath="$PROJECT_DIR$/out/production/QryEval/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QryopSlWand.java" afterPath="$PROJECT_DIR$/QryopSlWand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QryopSlWsum.java" afterPath="$PROJECT_DIR$/QryopSlWsum.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sample.out" afterPath="$PROJECT_DIR$/Sample.out" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sample.qry" afterPath="$PROJECT_DIR$/Sample.qry" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/QryEval/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/QryEval/.idea/workspace.xml" />
     </list>
     <ignored path="QryEval.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,14 +29,75 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="QryEval.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/QryEval.java">
+      <file leaf-file-name="QryopSlWsum.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/QryopSlWsum.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0169492">
-              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="23" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sample.param" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Sample.param">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sample.qry" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Sample.qry">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="284" selection-start-line="0" selection-start-column="284" selection-end-line="0" selection-end-column="284" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sample.out" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Sample.out">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="69" selection-start-line="16" selection-start-column="69" selection-end-line="16" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QryopSlWand.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/QryopSlWand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.51724136">
+              <caret line="17" column="100" selection-start-line="17" selection-start-column="100" selection-end-line="17" selection-end-column="100" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QryopSlAnd.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/QryopSlAnd.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="206" column="8" selection-start-line="206" selection-start-column="8" selection-end-line="217" selection-end-column="48" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="method#evaluateIndri#0;class#QryopSlAnd#0" expanded="false" />
+                <element signature="method#getSmallestDocid#0;class#QryopSlAnd#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QryopSlScore.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/QryopSlScore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -99,6 +132,10 @@
       <list>
         <option value="$PROJECT_DIR$/QryEval.iml" />
         <option value="$PROJECT_DIR$/QryEval.java" />
+        <option value="$PROJECT_DIR$/Sample.qry" />
+        <option value="$PROJECT_DIR$/DocLengthStore.java" />
+        <option value="$PROJECT_DIR$/QryopSlWsum.java" />
+        <option value="$PROJECT_DIR$/QryopSlWand.java" />
       </list>
     </option>
   </component>
@@ -113,10 +150,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="105" />
     <option name="y" value="22" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="width" value="1224" />
+    <option name="height" value="778" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -144,6 +180,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -162,11 +199,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QryEval" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QryEval" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="QryEval.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -177,6 +227,8 @@
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager" selected="Application.QryEval">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -348,6 +400,9 @@
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2c55af19-b077-4dfe-8833-c4df7cce1537" name="Default" comment="" />
@@ -358,7 +413,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="105" y="22" width="1400" height="1000" extended-state="0" />
+    <frame x="0" y="22" width="1224" height="778" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -367,7 +422,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39957035" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3438486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -376,15 +431,15 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24928571" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28267974" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2651622" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -403,7 +458,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -415,9 +470,79 @@
     <entry file="file://$PROJECT_DIR$/QryEval.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="341" column="16" selection-start-line="341" selection-start-column="16" selection-end-line="341" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="method#getResultsFromQuery#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getResultFromFile#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#getExternalDocid#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getExternalDocid#0;class#QryEval#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DocLengthStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sample.param">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sample.qry">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="78" selection-start-line="0" selection-start-column="78" selection-end-line="0" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QryopSlWand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QryopSlScore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QryEval.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="44" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QryEval.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="method#getResultsFromQuery#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getResultFromFile#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#getExternalDocid#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getExternalDocid#0;class#QryEval#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -444,6 +569,12 @@
           <caret line="40" column="70" selection-start-line="40" selection-start-column="70" selection-end-line="40" selection-end-column="70" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="method#getResultsFromQuery#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getResultFromFile#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#getExternalDocid#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getExternalDocid#0;class#QryEval#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -462,6 +593,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="method#getResultsFromQuery#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getResultFromFile#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#getExternalDocid#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getExternalDocid#0;class#QryEval#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -487,6 +624,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="method#getResultsFromQuery#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getResultFromFile#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#getExternalDocid#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getExternalDocid#0;class#QryEval#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -521,7 +664,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/QryopSlScore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QryEval.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.579378">
+          <caret line="458" column="75" selection-start-line="458" selection-start-column="75" selection-end-line="458" selection-end-column="75" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="method#getResultsFromQuery#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getResultFromFile#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="method#fatalError#0;class#QryEval#0" expanded="false" />
+            <element signature="docComment;method#getExternalDocid#0;class#QryEval#0" expanded="false" />
+            <element signature="method#getExternalDocid#0;class#QryEval#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DocLengthStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.88235295">
+          <caret line="38" column="78" selection-start-line="38" selection-start-column="78" selection-end-line="38" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sample.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="69" selection-start-line="16" selection-start-column="69" selection-end-line="16" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sample.qry">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="284" selection-start-line="0" selection-start-column="284" selection-end-line="0" selection-end-column="284" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sample.param">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -529,13 +720,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/QryEval.java">
+    <entry file="file://$PROJECT_DIR$/QryopSlAnd.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0169492">
-          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="206" column="8" selection-start-line="206" selection-start-column="8" selection-end-line="217" selection-end-column="48" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="method#evaluateIndri#0;class#QryopSlAnd#0" expanded="false" />
+            <element signature="method#getSmallestDocid#0;class#QryopSlAnd#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QryopSlWsum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="23" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QryopSlWand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51724136">
+          <caret line="17" column="100" selection-start-line="17" selection-start-column="100" selection-end-line="17" selection-end-column="100" />
+          <folding />
         </state>
       </provider>
     </entry>

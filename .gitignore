@@ -1,0 +1,5 @@
+*.pdf
+.idea/
+*.out
+*.qry
+out/
