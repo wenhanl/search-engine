@@ -34,6 +34,7 @@ public class ScoreList{
         while (!queue.isEmpty()) {
             scores.add(queue.poll());
         }
+        System.out.println(scores.size());
     }
 
     /**
@@ -74,6 +75,8 @@ public class ScoreList{
     public boolean isEmpty(){
         return scores.isEmpty();
     }
+
+    public int size(){ return scores.size();}
 
 
 }

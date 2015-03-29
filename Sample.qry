@@ -1,1 +1,1 @@
-11:#AND ( #WSUM( 0.100000 gmat.url 0.200000 gmat.title 0.300000 gmat.inlink 0.400000 gmat.body ) #WSUM( 0.100000 prep.url 0.200000 prep.title 0.300000 prep.inlink 0.400000 prep.body ) #WSUM( 0.100000 classes.url 0.200000 classes.title 0.300000 classes.inlink 0.400000 classes.body ) )
+10: cheap internet

@@ -23,18 +23,30 @@ import org.apache.lucene.util.Version;
 import java.io.*;
 import java.util.*;
 
-class QueryRes{
-    String id;
-    QryResult result;
 
-    QueryRes(String id, QryResult res) {
-        this.id = id;
-        this.result = res;
-    }
-}
 
 public class QryEval {
 
+    private static class QueryRes{
+        String id;
+        QryResult result;
+
+        QueryRes(String id, QryResult res) {
+            this.id = id;
+            this.result = res;
+        }
+    }
+
+    private static class StemScore{
+        String stem;
+        double score;
+
+        StemScore(String stem, double score) {
+            this.stem = stem;
+            this.score = score;
+        }
+
+    }
     public static IndexReader READER;
     public static DocLengthStore dls;
 
@@ -133,19 +145,110 @@ public class QryEval {
         }
 
         ArrayList<QueryRes> results = new ArrayList<QueryRes>();
+        String queryFilePath = params.get("queryFilePath");
+        int topDocs = params.containsKey("fbDocs") ? Integer.valueOf(params.get("fbDocs")) : -1;
+        int topTerms = params.containsKey("fbTerms") ? Integer.valueOf(params.get("fbTerms")) : -1;
+        double mu = params.containsKey("fbMu") ? Double.valueOf(params.get("fbMu")) : -1;
+        double originWeight = params.containsKey("fbOrigWeight") ? Double.valueOf(params.get("fbOrigWeight")) : -1;
+        String expandOutPath = params.containsKey("fbExpansionQueryFile") ? params.get("fbExpansionQueryFile") : "";
 
-        if (!params.containsKey("fb") || !params.get("fb").equals("true") || !params.containsKey("fbInitialRankingFile")) {
+        if (!params.containsKey("fb") || !params.get("fb").equals("true")) {
             // Old way to retrieve documents
-            getResultsFromQuery(params.get("queryFilePath"), results, model);
+            getResultsFromQuery(queryFilePath, results, model);
         } else {
             if (params.containsKey("fbInitialRankingFile")) {
                 // Load result from result file
                 getResultFromFile(params.get("fbInitialRankingFile"), results);
             } else {
-                getResultsFromQuery(params.get("queryFilePath"), results, model);
+                getResultsFromQuery(queryFilePath, results, model);
             }
 
             // Query expansion begin
+
+
+            HashMap<String, Double> stemMap = new HashMap<String, Double>();
+            long totalC = READER.getSumTotalTermFreq("body");
+            BufferedWriter expandWriter = new BufferedWriter(new FileWriter(new File(expandOutPath)));
+
+            for(int i = 0; i < results.size(); i++) {
+
+                QueryRes curr = results.get(i);
+                StringBuilder sb = new StringBuilder();
+                sb.append(curr.id + ": #wand(");
+
+                for (int j = 0; j < topDocs && j < curr.result.docScores.size(); j++) {
+
+
+                    double indriScore = curr.result.docScores.getDocidScore(j);
+                    int currDoc = curr.result.docScores.getDocid(j);
+                    TermVector vector = new TermVector(currDoc, "body");
+
+                    // Use a set to avoid calculating duplicate stem in one document
+                    HashSet<Integer> currDocVisited = new HashSet<Integer>();
+
+                    for (int k = 0; k < vector.positionsLength(); k++) {
+                        int currStem = vector.stemAt(k);
+                        if (currStem == 0) {
+                            continue;
+                        }
+                        String stemString = vector.stemString(currStem);
+                        if (currDocVisited.contains(currStem) || stemString.contains(".") || stemString.contains(",")) {
+                            continue;
+                        }
+
+                        currDocVisited.add(currStem);
+                        int tf = vector.stemFreq(currStem);
+                        double ptc = (double) vector.totalStemFreq(currStem) / totalC;
+                        double idf = Math.log(1.0/ptc);
+                        double ptd = (tf + mu * ptc) / (vector.positionsLength() + mu);
+                        double currScore = indriScore * ptd * idf;
+
+                        if (stemMap.containsKey(stemString)) {
+                            stemMap.put(stemString, stemMap.get(stemString) + currScore);
+                        } else {
+                            stemMap.put(stemString, currScore);
+                        }
+
+                    }
+                }
+
+                // Find out top terms using a heap
+                PriorityQueue<StemScore> pq = new PriorityQueue<StemScore>(topTerms, new Comparator<StemScore>() {
+                    @Override
+                    public int compare(StemScore t1, StemScore t2) {
+                        if (t1.score > t2.score) {
+                            return 1;
+                        } else if (t1.score == t2.score) {
+                            return 0;
+                        } else {
+                            return -1;
+                        }
+                    }
+                });
+
+                for (String k : stemMap.keySet()) {
+                    StemScore sc = new StemScore(k, stemMap.get(k));
+                    if (pq.size() < topTerms || pq.peek().score < sc.score) {
+                        pq.offer(sc);
+                        if (pq.size() > topTerms) {
+                            pq.poll();
+                        }
+                    }
+
+                }
+
+                for (StemScore s : pq) {
+                    //System.out.println(s.stem + ": " + s.score);
+                    sb.append(s.score + " " + s.stem + " ");
+                }
+
+                sb.append(")\n");
+                System.out.println(sb.toString());
+                expandWriter.write(sb.toString());
+                expandWriter.flush();
+            }
+
+            expandWriter.close();
 
         }
 
@@ -164,6 +267,11 @@ public class QryEval {
 
         System.out.println("Running time: " + (endTime - startTime) + " ms.");
         printMemoryUsage(false);
+
+    }
+
+    static void expandQuery(String out, PriorityQueue<StemScore> pq) throws IOException{
+        BufferedWriter writer = new BufferedWriter(new FileWriter(new File(out)));
 
     }
 
