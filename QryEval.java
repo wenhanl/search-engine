@@ -37,16 +37,21 @@ public class QryEval {
         }
     }
 
-    private static class StemScore{
+    private static class Stem{
         String stem;
         double score;
+        double ptc;
+        HashSet<Integer> docs;
 
-        StemScore(String stem, double score) {
+        Stem(String stem, double score, double ptc) {
             this.stem = stem;
             this.score = score;
+            this.ptc = ptc;
+            this.docs = new HashSet<Integer>();
         }
 
     }
+
     public static IndexReader READER;
     public static DocLengthStore dls;
 
@@ -72,9 +77,6 @@ public class QryEval {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-
-//        long maxBytes = Runtime.getRuntime().maxMemory();
-//        System.out.println("Max memory: " + maxBytes / 1024 / 1024 + "M");
 
         // must supply parameter file
         if (args.length < 1) {
@@ -146,11 +148,8 @@ public class QryEval {
 
         ArrayList<QueryRes> results = new ArrayList<QueryRes>();
         String queryFilePath = params.get("queryFilePath");
-        int topDocs = params.containsKey("fbDocs") ? Integer.valueOf(params.get("fbDocs")) : -1;
-        int topTerms = params.containsKey("fbTerms") ? Integer.valueOf(params.get("fbTerms")) : -1;
-        double mu = params.containsKey("fbMu") ? Double.valueOf(params.get("fbMu")) : -1;
-        double originWeight = params.containsKey("fbOrigWeight") ? Double.valueOf(params.get("fbOrigWeight")) : -1;
-        String expandOutPath = params.containsKey("fbExpansionQueryFile") ? params.get("fbExpansionQueryFile") : "";
+
+        ArrayList<String> originQueries = getOriginQueries(queryFilePath);
 
         if (!params.containsKey("fb") || !params.get("fb").equals("true")) {
             // Old way to retrieve documents
@@ -165,90 +164,7 @@ public class QryEval {
 
             // Query expansion begin
 
-
-            HashMap<String, Double> stemMap = new HashMap<String, Double>();
-            long totalC = READER.getSumTotalTermFreq("body");
-            BufferedWriter expandWriter = new BufferedWriter(new FileWriter(new File(expandOutPath)));
-
-            for(int i = 0; i < results.size(); i++) {
-
-                QueryRes curr = results.get(i);
-                StringBuilder sb = new StringBuilder();
-                sb.append(curr.id + ": #wand(");
-
-                for (int j = 0; j < topDocs && j < curr.result.docScores.size(); j++) {
-
-
-                    double indriScore = curr.result.docScores.getDocidScore(j);
-                    int currDoc = curr.result.docScores.getDocid(j);
-                    TermVector vector = new TermVector(currDoc, "body");
-
-                    // Use a set to avoid calculating duplicate stem in one document
-                    HashSet<Integer> currDocVisited = new HashSet<Integer>();
-
-                    for (int k = 0; k < vector.positionsLength(); k++) {
-                        int currStem = vector.stemAt(k);
-                        if (currStem == 0) {
-                            continue;
-                        }
-                        String stemString = vector.stemString(currStem);
-                        if (currDocVisited.contains(currStem) || stemString.contains(".") || stemString.contains(",")) {
-                            continue;
-                        }
-
-                        currDocVisited.add(currStem);
-                        int tf = vector.stemFreq(currStem);
-                        double ptc = (double) vector.totalStemFreq(currStem) / totalC;
-                        double idf = Math.log(1.0/ptc);
-                        double ptd = (tf + mu * ptc) / (vector.positionsLength() + mu);
-                        double currScore = indriScore * ptd * idf;
-
-                        if (stemMap.containsKey(stemString)) {
-                            stemMap.put(stemString, stemMap.get(stemString) + currScore);
-                        } else {
-                            stemMap.put(stemString, currScore);
-                        }
-
-                    }
-                }
-
-                // Find out top terms using a heap
-                PriorityQueue<StemScore> pq = new PriorityQueue<StemScore>(topTerms, new Comparator<StemScore>() {
-                    @Override
-                    public int compare(StemScore t1, StemScore t2) {
-                        if (t1.score > t2.score) {
-                            return 1;
-                        } else if (t1.score == t2.score) {
-                            return 0;
-                        } else {
-                            return -1;
-                        }
-                    }
-                });
-
-                for (String k : stemMap.keySet()) {
-                    StemScore sc = new StemScore(k, stemMap.get(k));
-                    if (pq.size() < topTerms || pq.peek().score < sc.score) {
-                        pq.offer(sc);
-                        if (pq.size() > topTerms) {
-                            pq.poll();
-                        }
-                    }
-
-                }
-
-                for (StemScore s : pq) {
-                    //System.out.println(s.stem + ": " + s.score);
-                    sb.append(s.score + " " + s.stem + " ");
-                }
-
-                sb.append(")\n");
-                System.out.println(sb.toString());
-                expandWriter.write(sb.toString());
-                expandWriter.flush();
-            }
-
-            expandWriter.close();
+            results = queryExpansion(params, results, model, originQueries);
 
         }
 
@@ -270,9 +186,159 @@ public class QryEval {
 
     }
 
-    static void expandQuery(String out, PriorityQueue<StemScore> pq) throws IOException{
-        BufferedWriter writer = new BufferedWriter(new FileWriter(new File(out)));
+    static ArrayList<QueryRes> queryExpansion(Map<String, String> params, ArrayList<QueryRes> results, RetrievalModel model, ArrayList<String> originQuerys)  throws IOException{
+        int topDocs = params.containsKey("fbDocs") ? Integer.valueOf(params.get("fbDocs")) : -1;
+        int topTerms = params.containsKey("fbTerms") ? Integer.valueOf(params.get("fbTerms")) : -1;
+        double mu = params.containsKey("fbMu") ? Double.valueOf(params.get("fbMu")) : -1;
+        double ow = params.containsKey("fbOrigWeight") ? Double.valueOf(params.get("fbOrigWeight")) : -1;
+        String expandOutPath = params.containsKey("fbExpansionQueryFile") ? params.get("fbExpansionQueryFile") : "";
 
+
+        HashMap<String, Stem> stemMap = new HashMap<String, Stem>();
+        long totalC = QryEval.READER.getSumTotalTermFreq("body");
+        BufferedWriter expandWriter = new BufferedWriter(new FileWriter(new File(expandOutPath)));
+        HashMap<Integer, Integer> docLenMap = new HashMap<Integer, Integer>();
+
+        ArrayList<QueryRes> res = new ArrayList<QueryRes>();
+        for(int i = 0; i < results.size(); i++) {
+
+            QueryRes curr = results.get(i);
+            HashSet<Integer> totalDocs = new HashSet<Integer>();
+
+            for (int j = 0; j < topDocs && j < curr.result.docScores.size(); j++) {
+
+
+                double indriScore = curr.result.docScores.getDocidScore(j);
+                int currDoc = curr.result.docScores.getDocid(j);
+                TermVector vector = new TermVector(currDoc, "body");
+
+                // Use a set to avoid calculating duplicate stem in one document
+                HashSet<Integer> currDocVisited = new HashSet<Integer>();
+                int docLen = vector.positionsLength();
+                docLenMap.put(j, docLen);
+                totalDocs.add(j);
+
+                for (int k = 0; k < docLen; k++) {
+                    int currStem = vector.stemAt(k);
+                    if (currStem == 0) {
+                        continue;
+                    }
+                    String stemString = vector.stemString(currStem);
+                    if (currDocVisited.contains(currStem) || stemString.contains(".") || stemString.contains(",")) {
+                        continue;
+                    }
+
+                    currDocVisited.add(currStem);
+                    int tf = vector.stemFreq(currStem);
+                    double ptc = (double) vector.totalStemFreq(currStem) / totalC;
+                    double idf = Math.log(1.0/ptc);
+                    double ptd = (tf + mu * ptc) / (docLen + mu);
+                    double currScore = indriScore * ptd * idf;
+
+                    if (stemMap.containsKey(stemString)) {
+                        stemMap.get(stemString).score += currScore;
+                        stemMap.get(stemString).docs.add(j);
+                    } else {
+                        Stem tempStem = new Stem(stemString, currScore, ptc);
+                        tempStem.docs.add(j);
+                        stemMap.put(stemString, tempStem);
+                    }
+
+                }
+            }
+
+            if (mu != 0) {
+                for (String k : stemMap.keySet()) {
+                    Stem currStem = stemMap.get(k);
+
+                    // Get diff set
+                    HashSet<Integer> copy = new HashSet<Integer>(totalDocs);
+                    copy.removeAll(currStem.docs);
+
+
+                    double currPtc = currStem.ptc;
+                    double idf = Math.log(1.0 / currPtc);
+                    for (int id : copy) {
+                        double indriScore = curr.result.docScores.getDocidScore(id);
+                        int len = docLenMap.get(id);
+                        double ptd = (mu * currPtc) / (len + mu);
+                        double defaultScore = indriScore * ptd * idf;
+                        currStem.score += defaultScore;
+                    }
+                }
+            }
+
+            // Find out top terms using a heap
+            PriorityQueue<Stem> pq = new PriorityQueue<Stem>(topTerms, new Comparator<Stem>() {
+                @Override
+                public int compare(Stem t1, Stem t2) {
+                    if (t1.score > t2.score) {
+                        return 1;
+                    } else if (t1.score == t2.score) {
+                        return 0;
+                    } else {
+                        return -1;
+                    }
+                }
+            });
+
+            for (String k : stemMap.keySet()) {
+                Stem sc = stemMap.get(k);
+                if (pq.size() < topTerms || pq.peek().score < sc.score) {
+                    pq.offer(stemMap.get(k));
+                    if (pq.size() > topTerms) {
+                        pq.poll();
+                    }
+                }
+
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(curr.id + ": #wand(");
+            for (Stem s : pq) {
+                //System.out.println(s.stem + ": " + s.score);
+                sb.append(s.score + " " + s.stem + " ");
+            }
+
+            sb.append(")");
+
+            String query = sb.toString().split(":")[1];
+            String finalQuery = "#wand(" + String.valueOf(ow) + " #and(" + originQuerys.get(i) + ") " + String.valueOf(1 - ow) + " " + query + ")";
+            Qryop qtree = parseQuery(finalQuery, model);
+            QryResult result = qtree.evaluate(model);
+            result.docScores.prioritySort();
+            res.add(new QueryRes(curr.id, result));
+
+            sb.append("\n");
+            System.out.println(sb.toString());
+            expandWriter.write(sb.toString());
+            expandWriter.flush();
+        }
+
+        expandWriter.close();
+        return res;
+    }
+
+    static ArrayList<String> getOriginQueries(String paramFileName) {
+        ArrayList<String> res = new ArrayList<String>();
+        Scanner scan = null;
+        try {
+            scan = new Scanner(new File(paramFileName));
+
+            do {
+                String line = scan.nextLine();
+                String[] pair = line.split(":");
+                res.add(pair[1]);
+
+            } while (scan.hasNext());
+            scan.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
     /**
@@ -414,7 +480,7 @@ public class QryEval {
         //qString = "#or(" + qString + ")";
 
         if (model instanceof RetrievalModelUnrankedBoolean || model instanceof RetrievalModelRankedBoolean) {
-            qString = "#or(" + qString + ")";
+            qString = "#and(" + qString + ")";
         } else if (model instanceof RetrievalModelBM25) {
             qString = "#sum(" + qString + ")";
         } else if (model instanceof RetrievalModelIndri) {

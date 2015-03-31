@@ -40,6 +40,11 @@ public class QryopSlWand extends QryopSl{
             return result;
         }
 
+        double totalWeight = 0;
+        for (int i = 0; i < argPtrs.size(); i++) {
+            totalWeight += args.get(i).weight;
+        }
+
         int index = 0;
         while (index < argPtrs.size()) {
             // Get smallest docid in ptri[nextDocid]
@@ -48,7 +53,7 @@ public class QryopSlWand extends QryopSl{
 
             for (int i = 0; i < argPtrs.size(); i++) {
                 ArgPtr ptri = argPtrs.get(i);
-                double weight = args.get(i).weight;
+                double weight = args.get(i).weight / totalWeight;
 
                 if (ptri.scoreList.scores.size() <= ptri.nextDoc || ptri.scoreList.getDocid(ptri.nextDoc) != docid) {
                     // In case of not equal, mult by defaultScore

@@ -34,7 +34,6 @@ public class ScoreList{
         while (!queue.isEmpty()) {
             scores.add(queue.poll());
         }
-        System.out.println(scores.size());
     }
 
     /**
